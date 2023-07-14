@@ -3,7 +3,7 @@
     <arg name="prefix" default=""/>
     <arg name="offline" default="true"/>
     <arg name="use_rviz" default="true"/>
-    <arg name="bag_path" default="/home/shalaby/Downloads/random1/ifo001_bag_2023-06-19-12-05-57.bag"/>
+    <arg name="bag_path" default="/home/bags/MH_01_easy.bag"/>
     <arg name="do_loop_closures" default="true"/>
 
     <!-- Launch RVIZ -->
@@ -25,11 +25,11 @@
     <!-- Run image decompressor -->
     <group if="$(arg offline)">
         <node name="infra1_decompressor" output="screen" pkg="image_transport" type="republish"
-            args="compressed in:=/ifo001/camera/infra1/image_rect_raw raw out:=/ifo001/camera/infra1/image_raw"/>
+            args="compressed in:=$(arg prefix)/camera/infra1/image_rect_raw raw out:=$(arg prefix)/camera/infra1/image_raw"/>
         <node name="infra2_decompressor" output="screen" pkg="image_transport" type="republish"
-            args="compressed in:=/ifo001/camera/infra2/image_rect_raw raw out:=/ifo001/camera/infra2/image_raw"/>
+            args="compressed in:=$(arg prefix)/camera/infra2/image_rect_raw raw out:=$(arg prefix)/camera/infra2/image_raw"/>
         <node name="color_decompressor" output="screen" pkg="image_transport" type="republish"
-            args="compressed in:=/ifo001/camera/color/image_raw raw out:=/ifo001/camera/color/image_raw"/>
+            args="compressed in:=$(arg prefix)/camera/color/image_raw raw out:=$(arg prefix)/camera/color/image_raw"/>
     </group>
 
     <!-- Run bag file -->

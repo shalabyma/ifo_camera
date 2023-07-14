@@ -1,0 +1,35 @@
+<launch>
+	<!-- Use Bottom Camera + Realsense -->
+	<arg name="record_camera" default="true"/>
+
+	<!-- Launch the realsense node -->
+	<group if="$(arg use_realsense)">
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="enable_gyro" value="true"/>
+        <arg name="enable_accel" value="true"/>
+        <arg name="accel_fps" value="250"/>
+        <arg name="gyro_fps" value="200"/>
+        <arg name="enable_infra1" value="true"/>
+        <arg name="enable_infra2" value="true"/>
+        <arg name="enable_color" value="true"/>
+        <arg name="unite_imu_method" value="linear_interpolation"/>
+    </include>
+	</group>
+
+    <group if="$(arg record_camera)">
+        <node pkg="rosbag" type="record" name="rosbag_record"
+            args="record -o /home/$(arg user)/bags/calibrate
+                /$(arg machine2)/camera/imu
+                /$(arg machine2)/camera/infra1/image_rect_raw/compressed
+                /$(arg machine2)/camera/infra2/image_rect_raw/compressed
+                /$(arg machine2)/camera/color/image_raw/compressed"/>
+    </group>
+
+    <group unless="$(arg record_camera)">
+        <node pkg="rosbag" type="record" name="rosbag_record"
+            args="record -o /home/$(arg user)/bags/imu
+                /$(arg machine2)/camera/imu"/>
+    </group>
+	
+
+</launch>
