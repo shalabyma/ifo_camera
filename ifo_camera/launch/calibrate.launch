@@ -1,35 +1,39 @@
 <launch>
-	<!-- Toggle the recording of the camera topics -->
-	<arg name="record_camera" default="true"/>
+    <!-- Define the parameters to toggle recording of images -->
+    <arg name="record_images" default="true"/>
 
 	<!-- Launch the realsense node -->
-	<group if="$(arg use_realsense)">
     <include file="$(find realsense2_camera)/launch/rs_camera.launch">
         <arg name="enable_gyro" value="true"/>
         <arg name="enable_accel" value="true"/>
         <arg name="accel_fps" value="250"/>
         <arg name="gyro_fps" value="200"/>
-        <arg name="enable_infra1" value="true"/>
-        <arg name="enable_infra2" value="true"/>
+        <arg name="enable_infra1" value="$(arg record_images)"/>
+        <arg name="enable_infra2" value="$(arg record_images)"/>
         <arg name="enable_color" value="true"/>
         <arg name="unite_imu_method" value="linear_interpolation"/>
     </include>
-	</group>
 
-    <group if="$(arg record_camera)">
-        <node pkg="rosbag" type="record" name="rosbag_record"
-            args="record -o /home/$(arg user)/bags/calibrate
-                /camera/imu
-                /camera/infra1/image_rect_raw/compressed
-                /camera/infra2/image_rect_raw/compressed
-                /camera/color/image_raw/compressed"/>
-    </group>
+    <!-- Start the rosbag record node -->
+    <node pkg="rosbag" type="record" name="rosbag_record" output="screen" args="--split">
 
-    <group unless="$(arg record_camera)">
-        <node pkg="rosbag" type="record" name="rosbag_record"
-            args="record -o /home/$(arg user)/bags/imu
-                /camera/imu"/>
-    </group>
-	
+        <!-- Conditionally record topics 1 and 2 based on the parameter -->
+        <if eq="$(arg record_images)" value="true">
+            <param name="/infra1" value="true" />
+            <param name="/infra1/topic" value="/camera/infra1/image_rect_raw/compressed" />
+            <param name="/infra2" value="true" />
+            <param name="/infra2/topic" value="/camera/infra2/image_rect_raw/compressed" />
+            <param name="/color" value="true" />
+            <param name="/color/topic" value="/camera/color/image_raw/compressed" />
+        </if>
 
+        <!-- Always record topic 3 -->
+        <param name="/imu" value="true" />
+        <param name="/imu/topic" value="/camera/imu" />
+
+        <!-- Set the output bag file path -->
+        <param name="prefix" value="/home/uvify/bags" />
+
+    </node>
+            
 </launch>
