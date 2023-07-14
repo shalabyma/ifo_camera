@@ -15,8 +15,8 @@
     <node pkg="rosbag" type="record" name="rosbag_record"
         args="record -o /home/uvify/bags/calibrate
             /camera/imu
-            /camera/infra1/image_rect_raw
-            /camera/infra2/image_rect_raw
-            /camera/color/image_raw"/>
+            /camera/infra1/image_rect_raw/compressed
+            /camera/infra2/image_rect_raw/compressed
+            /camera/color/image_raw/compressed"/>
 
 </launch>
