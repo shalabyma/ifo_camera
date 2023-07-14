@@ -11,11 +11,15 @@
         <arg name="unite_imu_method" value="linear_interpolation"/>
     </include>
 
+    <!-- Delay the recording by 10 seconds -->
+    <node pkg="rosrun" type="sleep" name="delay_node" output="screen" args="10"/>
+
+    <!-- Record the camera topics -->
     <node pkg="rosbag" type="record" name="rosbag_record"
         args="record -o /home/uvify/bags/calibrate
             /camera/imu
-            /camera/infra1/image_rect_raw/compressed
-            /camera/infra2/image_rect_raw/compressed
-            /camera/color/image_raw/compressed"/>
+            /camera/infra1/image_rect_raw
+            /camera/infra2/image_rect_raw
+            /camera/color/image_raw"/>
 
 </launch>
