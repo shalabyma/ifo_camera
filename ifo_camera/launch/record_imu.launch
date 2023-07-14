@@ -9,9 +9,6 @@
         <arg name="unite_imu_method" value="linear_interpolation"/>
     </include>
 
-    <!-- Delay the recording by 10 seconds -->
-    <node pkg="rosrun" type="sleep" name="delay_node" output="screen" args="10"/>
-
     <!-- Record the IMU topic -->
     <node pkg="rosbag" type="record" name="rosbag_record"
         args="record -o /home/uvify/bags/calibrate
