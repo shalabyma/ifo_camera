@@ -19,7 +19,7 @@
             <arg name="enable_color" value="true"/>
             <arg name="unite_imu_method" value="linear_interpolation"/>
         </include>
-        <node pkg="rosbag" type="record" name="rosbag_record_range"
+        <node pkg="rosbag" type="record" name="rosbag_record"
             args="record -o /home/$(arg user)/bags/$(arg machine1)_imu
                 /$(arg machine1)/camera/imu"/>
     </group>
@@ -37,7 +37,7 @@
             <arg name="enable_color" value="true"/>
             <arg name="unite_imu_method" value="linear_interpolation"/>
         </include>
-        <node pkg="rosbag" type="record" name="rosbag_record_range"
+        <node pkg="rosbag" type="record" name="rosbag_record"
             args="record -o /home/$(arg user)/bags/$(arg machine2)_imu
                 /$(arg machine2)/camera/imu"/>
     </group>
@@ -55,7 +55,7 @@
             <arg name="enable_color" value="true"/>
             <arg name="unite_imu_method" value="linear_interpolation"/>
         </include>
-        <node pkg="rosbag" type="record" name="rosbag_record_range"
+        <node pkg="rosbag" type="record" name="rosbag_record"
             args="record -o /home/$(arg user)/bags/$(arg machine3)_imu
                 /$(arg machine3)/camera/imu"/>
     </group>

@@ -14,12 +14,12 @@
 
     <!-- Launch VINS -->
     <node name="vins_estimator" output="screen" pkg="vins" type="vins_node"
-        args="$(find ifo_camera)/config/realsense_stereo_imu_config.yaml"/>
+        args="$(find ifo_camera)/config/ifo001_config.yaml"/>
     
     <!-- Launch loop closures -->
     <group if="$(arg do_loop_closures)">
         <node name="loop_fusion" output="screen" pkg="loop_fusion" type="loop_fusion_node"
-            args="$(find ifo_camera)/config/realsense_stereo_imu_config.yaml"/>
+            args="$(find ifo_camera)/config/ifo001_config.yaml"/>
     </group>
 
     <!-- Run image decompressor -->
@@ -35,7 +35,7 @@
     <!-- Run bag file -->
     <group if="$(arg offline)">
         <node name="bag_player" output="screen" pkg="rosbag" type="play"
-            args="$(arg bag_path)"/>
+            args="$(arg bag_path) -s 1"/>
     </group>
 
 </launch>

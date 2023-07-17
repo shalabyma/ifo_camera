@@ -23,6 +23,9 @@ def uncompress_bag(input_bag, output_bag):
             else:
                 bag_out.write(topic.split("/compressed")[0], msg, t)
 
+        for _ in bag_out.reindex():
+            pass
+
 if __name__ == '__main__':
     if len(sys.argv) != 3:
         print("Not enough arguments. Usage: python image_uncompress.py input_bag output_bag")
