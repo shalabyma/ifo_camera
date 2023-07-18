@@ -1,6 +1,7 @@
 <launch>
     <!-- Global parameters -->
-    <arg name="prefix" default=""/>
+    <arg name="topic_prefix" default=""/>
+    <arg name="config_prefix" default=""/>
     <arg name="offline" default="true"/>
     <arg name="use_rviz" default="true"/>
     <arg name="bag_path" default="/home/bags/MH_01_easy.bag"/>
@@ -14,22 +15,22 @@
 
     <!-- Launch VINS -->
     <node name="vins_estimator" output="screen" pkg="vins" type="vins_node"
-        args="$(find ifo_camera)/config/ifo001_config.yaml"/>
+        args="$(find ifo_camera)/config/$(arg config_prefix)config.yaml"/>
     
     <!-- Launch loop closures -->
     <group if="$(arg do_loop_closures)">
         <node name="loop_fusion" output="screen" pkg="loop_fusion" type="loop_fusion_node"
-            args="$(find ifo_camera)/config/ifo001_config.yaml"/>
+            args="$(find ifo_camera)/config/$(arg config_prefix)config.yaml"/>
     </group>
 
     <!-- Run image decompressor -->
     <group if="$(arg offline)">
         <node name="infra1_decompressor" output="screen" pkg="image_transport" type="republish"
-            args="compressed in:=$(arg prefix)/camera/infra1/image_rect_raw raw out:=$(arg prefix)/camera/infra1/image_raw"/>
+            args="compressed in:=$(arg topic_prefix)/camera/infra1/image_rect_raw raw out:=$(arg topic_prefix)/camera/infra1/image_raw"/>
         <node name="infra2_decompressor" output="screen" pkg="image_transport" type="republish"
-            args="compressed in:=$(arg prefix)/camera/infra2/image_rect_raw raw out:=$(arg prefix)/camera/infra2/image_raw"/>
+            args="compressed in:=$(arg topic_prefix)/camera/infra2/image_rect_raw raw out:=$(arg topic_prefix)/camera/infra2/image_raw"/>
         <node name="color_decompressor" output="screen" pkg="image_transport" type="republish"
-            args="compressed in:=$(arg prefix)/camera/color/image_raw raw out:=$(arg prefix)/camera/color/image_raw"/>
+            args="compressed in:=$(arg topic_prefix)/camera/color/image_raw raw out:=$(arg topic_prefix)/camera/color/image_raw"/>
     </group>
 
     <!-- Run bag file -->

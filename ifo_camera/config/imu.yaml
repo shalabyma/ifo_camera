@@ -1,4 +1,0 @@
-imu_topic: "/ifo002/camera/imu"
-imu_rate: 200
-measure_rate: 200 # Rate to which imu data is subsampled
-sequence_time: 11600 # 3 hours in seconds

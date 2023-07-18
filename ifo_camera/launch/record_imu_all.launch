@@ -12,6 +12,7 @@
             env-loader="/home/$(arg user)/catkin_ws/devel/env.sh"/>
         <!-- Launch the realsense node -->
         <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+            <arg name="initial_reset" value="true"/>
             <arg name="enable_gyro" value="true"/>
             <arg name="enable_accel" value="true"/>
             <arg name="accel_fps" value="250"/>
@@ -30,6 +31,7 @@
             env-loader="/home/$(arg user)/catkin_ws/devel/env.sh"/>
         <!-- Launch the realsense node -->
         <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+            <arg name="initial_reset" value="true"/>
             <arg name="enable_gyro" value="true"/>
             <arg name="enable_accel" value="true"/>
             <arg name="accel_fps" value="250"/>
@@ -48,6 +50,7 @@
             env-loader="/home/$(arg user)/catkin_ws/devel/env.sh"/>
         <!-- Launch the realsense node -->
         <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+            <arg name="initial_reset" value="true"/>
             <arg name="enable_gyro" value="true"/>
             <arg name="enable_accel" value="true"/>
             <arg name="accel_fps" value="250"/>
