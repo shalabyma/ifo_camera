@@ -5,6 +5,9 @@
         <arg name="use_realsense" value="true"/>"
     </include>
 
+    <!-- Launch the cores -->
+    <include file="$(find ifo_bringup)/launch/core.launch"> </include>
+
     <!-- Record the camera topics -->
     <node pkg="rosbag" type="record" name="rosbag_record"
         args="record -o /home/uvify/bags/images

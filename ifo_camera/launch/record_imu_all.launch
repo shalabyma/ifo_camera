@@ -15,6 +15,9 @@
             <arg name="use_mocap" value="false"/>
             <arg name="use_realsense" value="true"/>
         </include>
+        <!-- Launch the cores -->
+        <include file="$(find ifo_bringup)/launch/core.launch"> </include>
+        <!-- Record the IMU topics -->
         <node pkg="rosbag" type="record" name="rosbag_record"
             args="record -o /home/$(arg user)/bags/$(arg machine1)_imu
                 /$(arg machine1)/camera/imu
@@ -31,6 +34,9 @@
             <arg name="use_mocap" value="false"/>
             <arg name="use_realsense" value="true"/>
         </include>
+        <!-- Launch the cores -->
+        <include file="$(find ifo_bringup)/launch/core.launch"> </include>
+        <!-- Record the IMU topics -->
         <node pkg="rosbag" type="record" name="rosbag_record"
             args="record -o /home/$(arg user)/bags/$(arg machine2)_imu
                 /$(arg machine2)/camera/imu
@@ -47,6 +53,9 @@
             <arg name="use_mocap" value="false"/>
             <arg name="use_realsense" value="true"/>
         </include>
+        <!-- Launch the cores -->
+        <include file="$(find ifo_bringup)/launch/core.launch"> </include>
+        <!-- Record the IMU topics -->
         <node pkg="rosbag" type="record" name="rosbag_record"
             args="record -o /home/$(arg user)/bags/$(arg machine3)_imu
                 /$(arg machine3)/camera/imu
