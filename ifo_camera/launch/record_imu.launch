@@ -1,18 +1,14 @@
 <launch>
-	<!-- Launch the realsense node -->
-    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
-        <arg name="initial_reset" value="true"/>
-        <arg name="enable_gyro" value="true"/>
-        <arg name="enable_accel" value="true"/>
-        <arg name="accel_fps" value="250"/>
-        <arg name="gyro_fps" value="200"/>
-        <arg name="enable_color" value="true"/>
-        <arg name="unite_imu_method" value="linear_interpolation"/>
+	<!-- Launch the hardware -->
+    <include file="$(find ifo_hardware)/launch/hardware.launch">
+        <arg name="use_mocap" value="false"/>
+        <arg name="use_realsense" value="true"/>"
     </include>
 
     <!-- Record the IMU topic -->
     <node pkg="rosbag" type="record" name="rosbag_record"
-        args="record -o /home/uvify/bags/calibrate
-            /camera/imu"/>
-
+        args="record -o /home/uvify/bags/imu
+            /camera/imu
+            /mavros/imu/data_raw
+            /mavros/imu/mag"/>
 </launch>

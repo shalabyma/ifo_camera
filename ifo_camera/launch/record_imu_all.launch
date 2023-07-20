@@ -10,57 +10,48 @@
         <machine name="$(arg machine1)" address="$(arg machine1)" user="$(arg user)" 
             password="$(arg password)" default="true" 
             env-loader="/home/$(arg user)/catkin_ws/devel/env.sh"/>
-        <!-- Launch the realsense node -->
-        <include file="$(find realsense2_camera)/launch/rs_camera.launch">
-            <arg name="initial_reset" value="true"/>
-            <arg name="enable_gyro" value="true"/>
-            <arg name="enable_accel" value="true"/>
-            <arg name="accel_fps" value="250"/>
-            <arg name="gyro_fps" value="200"/>
-            <arg name="enable_color" value="true"/>
-            <arg name="unite_imu_method" value="linear_interpolation"/>
+        <!-- Launch the hardware -->
+        <include file="$(find ifo_hardware)/launch/hardware.launch">
+            <arg name="use_mocap" value="false"/>
+            <arg name="use_realsense" value="true"/>
         </include>
         <node pkg="rosbag" type="record" name="rosbag_record"
             args="record -o /home/$(arg user)/bags/$(arg machine1)_imu
-                /$(arg machine1)/camera/imu"/>
+                /$(arg machine1)/camera/imu
+                /$(arg machine1)/mavros/imu/data_raw
+                /$(arg machine1)/mavros/imu/mag"/>
     </group>
 
     <group ns="$(arg machine2)" unless="$(eval arg('machine2') == 'false')">
         <machine name="$(arg machine2)" address="$(arg machine2)" user="$(arg user)" 
             password="$(arg password)" default="true" 
             env-loader="/home/$(arg user)/catkin_ws/devel/env.sh"/>
-        <!-- Launch the realsense node -->
-        <include file="$(find realsense2_camera)/launch/rs_camera.launch">
-            <arg name="initial_reset" value="true"/>
-            <arg name="enable_gyro" value="true"/>
-            <arg name="enable_accel" value="true"/>
-            <arg name="accel_fps" value="250"/>
-            <arg name="gyro_fps" value="200"/>
-            <arg name="enable_color" value="true"/>
-            <arg name="unite_imu_method" value="linear_interpolation"/>
+        <!-- Launch the hardware -->
+        <include file="$(find ifo_hardware)/launch/hardware.launch">
+            <arg name="use_mocap" value="false"/>
+            <arg name="use_realsense" value="true"/>
         </include>
         <node pkg="rosbag" type="record" name="rosbag_record"
             args="record -o /home/$(arg user)/bags/$(arg machine2)_imu
-                /$(arg machine2)/camera/imu"/>
+                /$(arg machine2)/camera/imu
+                /$(arg machine2)/mavros/imu/data_raw
+                /$(arg machine2)/mavros/imu/mag"/>
     </group>
 
     <group ns="$(arg machine3)" unless="$(eval arg('machine3') == 'false')">
         <machine name="$(arg machine3)" address="$(arg machine3)" user="$(arg user)" 
             password="$(arg password)" default="true" 
             env-loader="/home/$(arg user)/catkin_ws/devel/env.sh"/>
-        <!-- Launch the realsense node -->
-        <include file="$(find realsense2_camera)/launch/rs_camera.launch">
-            <arg name="initial_reset" value="true"/>
-            <arg name="enable_gyro" value="true"/>
-            <arg name="enable_accel" value="true"/>
-            <arg name="accel_fps" value="250"/>
-            <arg name="gyro_fps" value="200"/>
-            <arg name="enable_color" value="true"/>
-            <arg name="unite_imu_method" value="linear_interpolation"/>
+        <!-- Launch the hardware -->
+        <include file="$(find ifo_hardware)/launch/hardware.launch">
+            <arg name="use_mocap" value="false"/>
+            <arg name="use_realsense" value="true"/>
         </include>
         <node pkg="rosbag" type="record" name="rosbag_record"
             args="record -o /home/$(arg user)/bags/$(arg machine3)_imu
-                /$(arg machine3)/camera/imu"/>
+                /$(arg machine3)/camera/imu
+                /$(arg machine3)/mavros/imu/data_raw
+                /$(arg machine3)/mavros/imu/mag"/>
     </group>
 
 </launch>

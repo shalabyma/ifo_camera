@@ -1,23 +1,17 @@
 <launch>
-	<!-- Launch the realsense node -->
-    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
-        <arg name="initial_reset" value="true"/>
-        <arg name="enable_gyro" value="true"/>
-        <arg name="enable_accel" value="true"/>
-        <arg name="accel_fps" value="250"/>
-        <arg name="gyro_fps" value="200"/>
-        <arg name="enable_infra1" value="true"/>
-        <arg name="enable_infra2" value="true"/>
-        <arg name="enable_color" value="true"/>
-        <arg name="unite_imu_method" value="copy"/>
+	<!-- Launch the hardware -->
+    <include file="$(find ifo_hardware)/launch/hardware.launch">
+        <arg name="use_mocap" value="false"/>
+        <arg name="use_realsense" value="true"/>"
     </include>
 
     <!-- Record the camera topics -->
     <node pkg="rosbag" type="record" name="rosbag_record"
-        args="record -o /home/uvify/bags/calibrate
+        args="record -o /home/uvify/bags/images
             /camera/imu
             /camera/infra1/image_rect_raw/compressed
             /camera/infra2/image_rect_raw/compressed
-            /camera/color/image_raw/compressed"/>
-
+            /camera/color/image_raw/compressed
+            /mavros/imu/data_raw
+            /mavros/imu/mag"/>
 </launch>
