@@ -1,4 +1,9 @@
 <launch>
+    <arg name="uwb_param_file" default="config/params.yaml"/>
+
+    <!--Load parameters. These are global and shared by all machines.-->
+    <rosparam command="load" file="$(find ifo_camera)/$(arg uwb_param_file)" ns="uwb"/>
+
 	<!-- Launch the hardware -->
     <include file="$(find ifo_hardware)/launch/hardware.launch">
         <arg name="use_mocap" value="false"/>
@@ -8,10 +13,17 @@
     <!-- Launch the cores -->
     <include file="$(find ifo_bringup)/launch/core.launch"> </include>
     
-    <!-- Record the IMU topics -->
+    <!-- Launch the UWB module -->
+    <node pkg="uwb_ros" type="uwb_module_node.py" name="uwb_node" output="screen"/>
+
+    <!-- Record the topics -->
     <node pkg="rosbag" type="record" name="rosbag_record"
         args="record -o /home/uvify/bags/imu
             /camera/imu
             /mavros/imu/data_raw
-            /mavros/imu/mag"/>
+            /mavros/imu/mag
+            /mavros/imu/static_pressure
+            /$(arg machine1)/uwb/passive 
+            /$(arg machine1)/uwb/range"/>
+
 </launch>

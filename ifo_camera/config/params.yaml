@@ -1,0 +1,155 @@
+
+####################################################################
+# Specify a list of serial ports which to connect to the UWB modules.
+# If empty, UWB modules will be automatically detected.
+####################################################################
+#ports:
+  # ifo001:
+  # - "/dev/ttyACM0"
+  # ifo002:
+  # - "/dev/ttyACM0"
+  # ifo003:
+  # - "/dev/ttyACM0"
+  # /:
+  # - "/dev/ttyACM0"
+
+####################################################################
+# Choose a decentralized scheduling scheme.
+####################################################################
+#scheduler: "slow"
+scheduler: "common_list"
+#scheduler: "hot_potato"
+
+####################################################################
+# Max possible module ID in the area (used for neighbor discovery)
+####################################################################
+max_id: 35
+
+####################################################################
+# Enable or disable the use of CIR.
+####################################################################
+cir_enabled: false
+
+####################################################################
+# Manually find neighbours. If false, will use the list below to 
+# deduce neighbours.
+####################################################################
+find_neighbours: false
+
+####################################################################
+# Sequence of range measurements. Used for "common_list" scheduler
+####################################################################
+tags:
+  - ifo001: [10, 11]
+  - ifo002: [20, 21]
+  - ifo003: [30, 31]
+# tags:
+  # - ifo001: [11]
+  # - ifo002: [10, 21]
+  # - ifo003: [30]
+anchors: [0,1,2,3,4,5]
+
+# sequence:
+#   # - from_id: 11
+#   #   to_id: 7
+#   # - from_id: 10
+#   #   to_id: 11
+#   # - from_id: 7
+#   #   to_id: 11
+#   # - from_id: 7
+#   #   to_id: 10
+#   # - from_id: 10
+#   #   to_id: 7
+#   # - from_id: 11
+#   #   to_id: 10
+
+#   # ------------------------------
+
+#   # - from_id: 2
+#   #   to_id: 4
+#   # - from_id: 3
+#   #   to_id: 6
+#   # - from_id: 4
+#   #   to_id: 3
+#   # - from_id: 6
+#   #   to_id: 3
+#   # - from_id: 3
+#   #   to_id: 2
+#   # - from_id: 4
+#   #   to_id: 6
+#   # - from_id: 2
+#   #   to_id: 3
+#   # - from_id: 6
+#   #   to_id: 4
+
+#   # ------------------------------
+  
+#   # - from_id: 7
+#   #   to_id: 9
+#   # - from_id: 11
+#   #   to_id: 7
+#   # - from_id: 9
+#   #   to_id: 11
+
+#   # - from_id: 7
+#   #   to_id: 11
+#   # - from_id: 9
+#   #   to_id: 7
+#   # - from_id: 11
+#   #   to_id: 9
+
+#   # ------------------------------
+
+#   - from_id: 6
+#     to_id: 4
+#   - from_id: 3
+#     to_id: 12
+#   - from_id: 4
+#     to_id: 5
+#   - from_id: 2
+#     to_id: 3
+#   - from_id: 12
+#     to_id: 6
+#   - from_id: 5
+#     to_id: 4
+
+#   - from_id: 6
+#     to_id: 3
+#   - from_id: 2
+#     to_id: 12
+#   - from_id: 3
+#     to_id: 6
+#   - from_id: 5
+#     to_id: 2
+#   - from_id: 4
+#     to_id: 6
+#   - from_id: 12
+#     to_id: 3
+
+#   - from_id: 6
+#     to_id: 5
+#   - from_id: 3
+#     to_id: 2
+#   - from_id: 4
+#     to_id: 12
+#   - from_id: 5
+#     to_id: 3
+#   - from_id: 2
+#     to_id: 4
+#   - from_id: 5
+#     to_id: 6
+    
+#   - from_id: 12
+#     to_id: 2
+#   - from_id: 3
+#     to_id: 5
+#   - from_id: 4
+#     to_id: 2
+#   - from_id: 6
+#     to_id: 12
+#   - from_id: 2
+#     to_id: 5
+#   - from_id: 12
+#     to_id: 4
+  
+  
