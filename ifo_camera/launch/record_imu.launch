@@ -23,7 +23,7 @@
             /mavros/imu/data_raw
             /mavros/imu/mag
             /mavros/imu/static_pressure
-            /$(arg machine1)/uwb/passive 
-            /$(arg machine1)/uwb/range"/>
+            /uwb/passive 
+            /uwb/range"/>
 
 </launch>
